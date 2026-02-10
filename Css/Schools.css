@@ -1,0 +1,198 @@
+  :root {
+  --main-color: #6f8576;
+}
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #f4f6f5;
+}
+
+/* NAVBAR */
+.main-navbar {
+    background: var(--main-color);
+}
+
+.navbar-brand span {
+    color: #fff;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.nav-link {
+    color: #fff !important;
+   
+}
+
+/* HERO */
+
+
+
+/* SCHOOLS */
+.schools { margin-top: 110px; padding: 70px 0; background-color: inherit; } .schools h2{ color: rgba(84, 100, 90, 0.952); }
+
+.school-card{
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.4s;
+    position: relative;
+}
+
+/* TOP BORDER ACCENT */
+.school-card::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--main-color);
+}
+
+/* HOVER */
+.school-card:hover{
+    transform: translateY(-12px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+}
+
+/* HEADER */
+.school-header{
+    background: var(--main-color); /* لون الموقع */
+    color: #fff;
+    padding: 12px 18px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* IMAGE */
+.school-img{
+    overflow: hidden;
+    width: 350px;
+}
+
+.school-img img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.school-card:hover img{
+    transform: scale(1.08);
+}
+
+/* BODY */
+.school-body{
+    padding: 18px;
+    text-align: center;
+}
+
+/* LOCATION */
+.location{
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+/* BUTTON */
+.school-btn{
+    background: var(--main-color);
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    font-family: 'cairo';
+}
+
+.school-btn:hover{
+    background: var(--main-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+/* Fade animation */
+.fade-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FOOTER */
+.footer {
+    background: #2f3e36;
+    color: #ddd;
+    padding: 50px 0 20px;
+}
+
+.footer h6 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.social i {
+    font-size: 22px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.copy {
+    margin-top: 30px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Animation */
+.fade-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.7s;
+}
+
+.fade-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.section-header {
+    margin-bottom: 60px; /* مسافة بين العنوان وبقية المحتوى */
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: flex-start; /* على أقصى اليمين */
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    margin-block:60px 25px;
+}
+
+.breadcrumb-item{
+    color: var(--main-color);
+}
+
+.breadcrumb a.breadcrumb-link {
+    text-decoration: none;
+    color: #28a745; /* اللون الأخضر */
+}
+
+.breadcrumb a.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--main-color); /* اللون الرمادي للنص الحالي */
+}
+.main-title{
+    color: var(--main-color);
+}

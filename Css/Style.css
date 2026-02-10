@@ -1,0 +1,314 @@
+p{
+    font-family: 'cairo';
+}
+.header{
+    z-index: 1000;
+}
+
+.nav-container{
+    background-color: rgba(107, 126, 114 , 0.6);
+    width: 100%;
+}
+
+.menu-bars .nav-item{
+    font-weight: bold;
+}
+.menu-bars .navbar-toggler{
+    margin-top: -10px;
+}
+.top-head-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.features-section {
+    background-color: #f8f9fa;
+}
+
+.feature-card {
+    background: #fff;
+    padding: 35px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.feature-card h5 {
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: #c8d3dd;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.feature-card .icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 4px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+.team-hover-section {
+    background: #f8f9fa;
+}
+
+.section-title h2 {
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: #777;
+    font-size: 15px;
+}
+
+/* ===== Team Card ===== */
+.team-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+}
+
+/* Image */
+.team-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Overlay */
+.team-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 110, 253, 0.85);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.35s ease;
+}
+
+.team-card:hover .team-overlay {
+    opacity: 1;
+}
+
+.team-overlay h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.team-overlay p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+.footer-title {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.footer-text {
+    font-size: 14px;
+}
+
+.footer-social {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.footer-social i{
+    border-radius: 4px;
+}
+.footer-social:hover {
+    background: #ffc107;
+    color: #000;
+}
+
+.footer-bottom {
+    background: rgba(0,0,0,0.25);
+}
+.faq-contact-section {
+    background-color: #f8f9fa;
+}
+
+.section-title h3 {
+    margin-bottom: 5px;
+}
+
+.accordion-button {
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.accordion-body {
+    color: #6c757d;
+    font-size: 15px;
+}
+
+.contact-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.contact-header {
+    background: #5d6d5e;
+    color: #fff;
+    padding: 16px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 18px;
+}
+
+.contact-card .form-control {
+    border-radius: 10px;
+}
+.submit{
+    background: #778a78;
+}
+.submit:hover{
+        background: rgba(137, 160, 145, 0.6);
+    transition: .3s;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 45px;
+    height: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+/* Responsive */
+
+@media(width < 960px){
+    .top-head-bar{
+        gap: 20px;
+    }
+}
+@media (max-width: 992px) {
+    .team-card img {
+        height: 260px;
+    }
+    .navbar .dropdown-menu{
+        position:static;
+        width: 100%;
+    }
+}
+
+@media(width < 800px){
+    .nav-container{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+    .top-head-bar img{
+        margin-top: 5px;
+    }
+    .menu-bars .navbar-toggler{
+    margin-top: 0;
+}
+    .head-item{
+        display: none;
+    }
+    .nav-container .container{
+    margin-top: 0;
+    padding-block: 9px;
+}
+}
+.card-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* الافتراضي: 3 كروت */
+.card {
+    flex: 0 0 30%;
+}
+
+/* من 600 إلى 800px → كرتين */
+@media (max-width: 800px) and (min-width: 500px) {
+    .card {
+        flex: 0 0 45%;
+    }
+
+    .card-wrapper .card:nth-child(3) {
+        display: none;
+    }
+}
+@media (max-width: 576px) {
+    .team-card img {
+        height: 220px;
+    }
+}
+
+
+@media(width < 500px){
+
+.card {
+        flex: 0 0 90%;
+    }
+
+    /* اخفاء الكرت الثاني والثالث */
+    .card-wrapper .card:nth-child(2),
+    .card-wrapper .card:nth-child(3) {
+        display: none;
+    }
+    .top-bars{
+        position: absolute;
+    }
+    }
+@media(width < 400px){
+    .top-head-bar img{
+        width: 210px;   
+    }
+    .menu-list{
+        margin-top: 1px;
+    }
+
+}
