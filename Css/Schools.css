@@ -195,4 +195,10 @@
 }
 .main-title{
     color: var(--main-color);
+
+}
+@media(width < 800px){
+.schools{
+    margin-top: 70px;
+}
 }
