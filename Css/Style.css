@@ -247,7 +247,7 @@ p{
         flex-direction: row-reverse;
     }
     .top-head-bar img{
-        margin-top: 5px;
+        margin-top: 6px;
     }
     .menu-bars .navbar-toggler{
     margin-top: 0;
@@ -310,5 +310,6 @@ p{
     .menu-list{
         margin-top: 1px;
     }
+
 
 }
