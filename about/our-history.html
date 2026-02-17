@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>مدارسنا - بطريركية الروم الأرثوذكس</title>
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/team.css">
+    <link rel="stylesheet" href="/Css/Style.css">
+    <link rel="stylesheet" href="/Css/Schools.css">
+    <style>
+        *{
+            font-family: 'Cairo', sans-serif;
+            box-sizing: border-box;
+        }
+
+         body{
+            background: inherit;
+         }
+        /* القسم الرئيسي */
+        .schools-section {
+            padding-inline:0;
+            padding-block: 20px 80px;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* الجزء الأيسر - النص */
+        .text-content {
+            padding: 20px 0;
+        }
+
+        .section-title {
+            color: #2c5530;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 100px;
+            height: 4px;
+            background: #2c5530;
+            border-radius: 2px;
+        }
+
+        .content-text {
+            line-height: 1.8;
+            font-size: 18px;
+            color: #444;
+            text-align: justify;
+        }
+
+        .content-text p {
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background-color: #f0f7f0;
+            border-right: 4px solid #2c5530;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-text {
+            font-weight: 600;
+            color: #2c5530;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* الجزء الأيمن - السلايدرات */
+        .sliders-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* تصميم السلايدر الفردي */
+        .single-slider {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .slider-header {
+            background: var(--main-color);
+            color: white;
+            padding: 15px 25px;
+            font-weight: 700;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slider-body {
+            position: relative;
+            height: 300px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: var(--main-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* عناصر التحكم في السلايدر */
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .slider-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--main-color);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .nav-btn:hover {
+            background: #3e6b3e;
+            transform: translateY(-2px);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--main-color);
+            transform: scale(1.2);
+        }
+
+        .slide-counter {
+            font-weight: 600;
+            color: white;
+            font-size: 15px;
+        }
+
+        /* تخصيصات للسلايدر الثاني */
+        .slider-two .slider-header {
+            background: #8a6d3b;
+        }
+
+        .slider-two .nav-btn {
+            background: #8a6d3b;
+        }
+
+        .slider-two .nav-btn:hover {
+            background: #a47c48;
+        }
+
+        .slider-two .dot.active {
+            background: #8a6d3b;
+        }
+
+        .slider-two .slide-caption {
+            background: rgba(138, 109, 59, 0.85);
+        }
+
+        /* التجاوب مع الشاشات */
+        @media (max-width: 992px) {
+            .section-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .sliders-container {
+                order: -1;
+            }
+            
+            .slider-body {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .schools-section {
+                padding: 20px 0;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .content-text {
+                font-size: 16px;
+            }
+            
+            
+            .slider-body {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .slider-body {
+                height: 250px;
+            }
+            
+            .section-container {
+                padding: 0 15px;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="mainNavbar" class="fixed-top p-0">
+
+    <!-- Top Bar -->
+    <div class="nav-container">
+        <div class="top-bars text-white pt-1">
+        <div class="container">
+            <div class="top-head-bar">
+                <div class="col-4 text-start fw-bold head-item">⏰ السبت - الخميس : 9 - 5</div>
+                <div class="col-4 text-center">
+                    <a class="navbar-brand m-0 p-0" href="#">
+                        <img src="/imag/LogoEngAr.png" style="height:35px;">
+                    </a>
+                </div>
+                <div class="col-4 text-end small head-item">📞 0790000000 | ✉ info@example.com</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Bar -->
+    <div class="menu-bars w-100 h-100">
+        <div class="container " >
+            <div class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav"  >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auo gap-3 menu-list">
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;" >من نحن</a>
+                            <ul class="dropdown-menu text-end">
+                                <li><a class="dropdown-item" href="board-of-trustees.html">مجلس أمناء المدارس</a></li>
+                                <li><a class="dropdown-item" href="bishop's-speech.html">كلمة سيادة المطران</a></li>
+                                <li><a class="dropdown-item" href="general-manager.html">كلمة مدير عام المدارس</a></li>
+                                <li><a class="dropdown-item" href="our-logo.html">شعارنا</a></li>
+                                <li><a class="dropdown-item" href="our-vision.html">رؤيتنا رسالتنا قيمنا</a></li> 
+                                <li><a class="dropdown-item" href="our-history.html">تاريخنا</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="/schools/schools.html" class="nav-link" href="#">المدارس</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;" >برامجنا</a>
+                            <ul class="dropdown-menu text-end" >
+                                <li><a class="dropdown-item" href="/our-programs/our-programs.html">المراحل التعليمية</a></li>
+                                <li><a class="dropdown-item" href="/our-programs/program1.html">البرنامج الوطني</a></li>
+                                <li><a class="dropdown-item" href="/our-programs/program2.html">البرنامج الدولي</a></li>
+                                <li><a class="dropdown-item" href="#">تقويم المدارس</a></li>
+                            </ul>
+                        </li>
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer;" >الحياة المدرسية</a>
+                             <ul class="dropdown-menu text-end" >
+                                <li><a class="dropdown-item" href="/our-competitions.html">المسابقات</a></li>
+                                <li><a class="dropdown-item" href="/our-activites.html">الأنشطة المدرسية</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/registration.html">القبول والتسجيل</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">أخبارنا</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">التوظيف</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">تواصل معنا</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</nav>>
+
+
+<section class="schools py-5">
+    <div class="container">
+
+        <!-- Section Title -->
+        <div class="section-header mb-4 position-relative">
+    <h1 class="main-title fw-bold mb-3 text-center">تاريخنا</h1>
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" style="font-weight: bold;"><a  href="/index.html" class="breadcrumb-link d-flex align-items-center gap-1">الرئيسية <span style="font-family:'Poppins';;font-size: 16px;">></span></a></li>
+            <li class="" style="font-weight: bold;padding-top: 1px;">تاريخنا</li>
+        </ol>
+    </nav>
+</div>
+<hr>
+
+      <section class="schools-section fade-card">
+    <div class="section-container">
+        <!-- الجزء الأيسر - النص -->
+        <div class="text-content">
+            <h2 class="section-title">مدارسنا</h2>
+            
+            <div class="content-text">
+                <p>
+                    تنتشر مدارس بطريركية الروم الأرثوذكس المقدسية ورياض وحضانات الأطفال 
+                    التابعة لها في شمال وجنوب وسط الأردن، وعددها الإجمالي خمس وعشرون. 
+                    يتميز الكادر التعليمي والإداري بالخبرة الطويلة المتجددة والكفاءة العالية.
+                </p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-text">
+                        تشرف الإدارة العامة للمدارس ممثلة بمديرها العام على سير العمل تحت مظلة 
+                        بطريركية الروم الأرثوذكس المقدسية التي تحرص على نهضة المدارس وتطوير 
+                        العمل ومواكبة التطور ودعم المدارس ورياض وحضانات الأطفال وتوفير جميع 
+                        احتياجاتها.
+                    </div>
+                </div>
+                
+                <p>
+                    أنشئت أول مدرسة في الأردن عام (1850) في مدينة الفحيص، وفي عام 1860 
+                    افتتحت مدرسة في مدينة الكرك وأنشئت أول روضة للأطفال في عجلون عام 
+                    1888 وتوالى إنشاء المدارس عاماً بعد عام لتنتشر في شمال ووسط وجنوب 
+                    البلاد. تعد مدارسنا مؤسسات غير ربحية تطبق فلسفة التربية والتعليم، إضافة 
+                    إلى الأهداف المنبثقة من رسالة بطريركية الروم الأرثوذكس والتي تتلخص في 
+                    تربية الأجيال الواعدة غير المتطرفة والواعية المتسلحة بالعلم والإيمان من 
+                    مرحلة رياض الأطفال حتى الثانوية العامة، كما تهتم بتوفير أفضل المناهج 
+                    أكاديمياً بما يتوافق مع الرؤية والرسالة، مع التركيز على اللغات الأجنبية (الإنجليزية 
+                    والفرنسية).
+                </p>
+                
+                <p>
+                    وقد أدخل البرنامج الدولي البريطاني عام 2014 في مدرسة الفحيص وبعدها تم 
+                    تأسيس روضة ومدرسة دولية جديدة عام 2015 في مدينة حنينا – مأدبا، إلى 
+                    جانب البرنامج الوطني المتبع في بقية المدارس، تهتم مدارسنا بإدماج طلبتها في 
+                    جميع المراحل برامج ريادية وأنشطة متنوعة لتطوير مهاراتهم وتعزيز الإبداع 
+                    لديهم.
+                </p>
+                
+                <p>
+                    وقد تخرج من مدارس البطريركية خلال العقود الماضية العديد من الشخصيات 
+                    الوطنية البارزة والمؤثرة التي كان لها إنجازات في المجتمع.
+                </p>
+            </div>
+        </div>
+        
+        <!-- الجزء الأيمن - السلايدرات -->
+        <div class="sliders-container">
+            <!-- السلايدر الأول -->
+            <div class="single-slider slider-one" id="slider1">
+                <div class="slider-header">
+                    <span>معرض مدارس البطريركية</span>
+                    <span class="slide-counter" id="counter1">1/4</span>
+                </div>
+                
+                <div class="slider-body">
+                    <!-- الشرائح ستضاف بواسطة JavaScript -->
+                </div>
+                
+                <div class="slider-controls">
+                    <div class="slider-nav">
+                        <button class="nav-btn prev-btn" data-slider="1">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="nav-btn next-btn" data-slider="1">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="slider-dots" id="dots1">
+                        <!-- النقاط ستضاف بواسطة JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السلايدر الثاني -->
+            <div class="single-slider slider-two" id="slider2">
+                <div class="slider-header">
+                    <span>معرض رياض الأطفال</span>
+                    <span class="slide-counter" id="counter2">1/4</span>
+                </div>
+                
+                <div class="slider-body">
+                    <!-- الشرائح ستضاف بواسطة JavaScript -->
+                </div>
+                
+                <div class="slider-controls">
+                    <div class="slider-nav">
+                        <button class="nav-btn prev-btn" data-slider="2">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="nav-btn next-btn" data-slider="2">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="slider-dots" id="dots2">
+                        <!-- النقاط ستضاف بواسطة JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    </div>
+</section>
+
+
+<div class="footer-bottom"></div>
+<footer class="footer-minimal text-white pt-5 px-2">
+    <div class="container pb-4">
+        <div class="row gy-4">
+
+            <!-- About -->
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">من نحن</h5>
+                <p class="footer-text" >
+                    مدرسة تقنية معلومات رائدة في الأردن، نهدف إلى بناء جيل مبدع
+                    ومؤهل أكاديميًا وعمليًا في مجالات البرمجة والتكنولوجيا الحديثة.
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-title">معلومات التواصل</h6>
+                <p class="footer-text">
+                    <i class="fa fa-location-dot me-2"></i>
+                    عمّان – الأردن
+                </p>
+                <p class="footer-text">
+                    <i class="fa fa-phone me-2"></i>
+                    06 000 0000
+                </p>
+                <p class="footer-text">
+                    <i class="fa fa-mobile-screen me-2"></i>
+                    07 0000 0000
+                </p>
+            </div>
+
+            <!-- Working Hours -->
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-title">أوقات الدوام</h6>
+                <p class="footer-text">السبت – الخميس</p>
+                <p class="footer-text">من 8:00 صباحًا حتى 3:00 مساءً</p>
+                <p class="footer-text">الجمعة: مغلق</p>
+            </div>
+
+            <!-- Newsletter & Social -->
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-title">تابعنا</h6>
+                <p class="footer-text">
+                    اشترك في نشرتنا البريدية ليصلك كل جديد عن برامجنا التعليمية.
+                </p>
+
+                <form class="d-flex gap-2 mb-3">
+                    <input type="email"
+                           class="form-control form-control-sm"
+                           placeholder="بريدك الإلكتروني">
+                    <button class="btn btn-outline-warning btn-sm">
+                        اشتراك
+                    </button>
+                </form>
+
+                <div class="d-flex gap-3">
+                    <a href="#" class="footer-social">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="footer-social">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="footer-social">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="footer-social">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom text-center pt-3 pb-2">
+        <p>
+            جميع الحقوق محفوظة © 2026<br>
+روضات ومدارس بطريركية الروم الأرثوذكس المقدسية
+        </p>
+    </div>
+</footer>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // بيانات السلايدر الأول (مدارس)
+        const slider1Data = [
+            {
+                image: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "المدرسة الأولى في الفحيص - تأسست 1850"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "مدرسة الكرك - تأسست 1860"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "مدرسة مأدبا الدولية - تأسست 2015"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1519452639340-ef50a1cd7131?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "حفل تخريج طلاب الثانوية العامة"
+            }
+             ,{
+                image: "/imag/School3.jpg",
+                caption: "حفل تخريج طلاب الثانوية العامة"
+            }
+        ];
+        
+        // بيانات السلايدر الثاني (رياض أطفال)
+        const slider2Data = [
+            {
+                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "أول روضة أطفال في عجلون - تأسست 1888"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "أنشطة تعليمية في رياض الأطفال"
+            },
+            {
+                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                caption: "فصول رياض الأطفال المجهزة"
+            },
+           
+        ];
+        
+        // تهيئة السلايدر
+        function initSlider(sliderId, sliderData, counterId, dotsId) {
+            const sliderBody = document.querySelector(`#${sliderId} .slider-body`);
+            const dotsContainer = document.getElementById(dotsId);
+            const counterElement = document.getElementById(counterId);
+            const prevBtn = document.querySelector(`#${sliderId} .prev-btn`);
+            const nextBtn = document.querySelector(`#${sliderId} .next-btn`);
+            
+            let currentSlideIndex = 0;
+            let slideInterval;
+            
+            // إضافة الشرائح
+            sliderData.forEach((slideData, index) => {
+                const slide = document.createElement('div');
+                slide.className = `slide ${index === 0 ? 'active' : ''}`;
+                
+                const img = document.createElement('img');
+                img.src = slideData.image;
+                img.alt = slideData.caption;
+                
+                const caption = document.createElement('div');
+                caption.className = 'slide-caption';
+                caption.textContent = slideData.caption;
+                
+                slide.appendChild(img);
+                slide.appendChild(caption);
+                sliderBody.appendChild(slide);
+                
+                // إضافة النقاط
+                const dot = document.createElement('span');
+                dot.className = `dot ${index === 0 ? 'active' : ''}`;
+                dot.dataset.index = index;
+                dotsContainer.appendChild(dot);
+                
+                dot.addEventListener('click', () => {
+                    goToSlide(index, sliderId, sliderData, counterId, dotsId);
+                });
+            });
+            
+            // تحديث العداد
+            function updateCounter() {
+                counterElement.textContent = `${currentSlideIndex + 1}/${sliderData.length}`;
+            }
+            
+            // الانتقال إلى شريحة محددة
+            function goToSlide(index, sliderId, sliderData, counterId, dotsId) {
+                currentSlideIndex = index;
+                
+                const slides = document.querySelectorAll(`#${sliderId} .slide`);
+                const dots = document.querySelectorAll(`#${dotsId} .dot`);
+                
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                updateCounter();
+                resetAutoSlide(sliderId);
+            }
+            
+            // الشريحة التالية
+            function nextSlide() {
+                let nextIndex = currentSlideIndex + 1;
+                if (nextIndex >= sliderData.length) {
+                    nextIndex = 0;
+                }
+                goToSlide(nextIndex, sliderId, sliderData, counterId, dotsId);
+            }
+            
+            // الشريحة السابقة
+            function prevSlide() {
+                let prevIndex = currentSlideIndex - 1;
+                if (prevIndex < 0) {
+                    prevIndex = sliderData.length - 1;
+                }
+                goToSlide(prevIndex, sliderId, sliderData, counterId, dotsId);
+            }
+            
+            // بدء التحريك التلقائي
+            function startAutoSlide() {
+                stopAutoSlide();
+                slideInterval = setInterval(nextSlide, 4000);
+            }
+            
+            // إيقاف التحريك التلقائي
+            function stopAutoSlide() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+            }
+            
+            // إعادة تشغيل التحريك التلقائي
+            function resetAutoSlide() {
+                stopAutoSlide();
+                startAutoSlide();
+            }
+            
+            // أحداث الأزرار
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            // إيقاف التحريك عند التمرير فوق السلايدر
+            sliderBody.addEventListener('mouseenter', stopAutoSlide);
+            sliderBody.addEventListener('mouseleave', startAutoSlide);
+            
+            // التهيئة الأولية
+            updateCounter();
+            startAutoSlide();
+        }
+        
+        // تهيئة السلايدر الأول
+        initSlider('slider1', slider1Data, 'counter1', 'dots1');
+        
+        // تهيئة السلايدر الثاني
+        initSlider('slider2', slider2Data, 'counter2', 'dots2');
+    });
+</script>
+
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="/Js/Js.js"></script>
+</body>
+</html>
