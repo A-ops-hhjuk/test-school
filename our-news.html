@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>أخبارنا - تصميم احترافي</title>
+
+    <!-- Google Font & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap & ملفاتك -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/team.css">
+    <link rel="stylesheet" href="/Css/Style.css">
+    <link rel="stylesheet" href="/Css/Schools.css">
+    
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* ========== السلايدر ========== */
+        .hero-slider {
+            height:500px;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        .hero-slider .carousel-item {
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+        }
+        /* المؤشرات (dots) داخل الصورة وتبعد 30px عن الأسفل */
+        .hero-slider .carousel-indicators {
+            bottom: 30px;
+            margin-bottom: 0;
+        }
+        .hero-slider .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #fff;
+            opacity: 0.7;
+            margin: 0 5px;
+            border: none;
+        }
+        .hero-slider .carousel-indicators button.active {
+            opacity: 1;
+            background-color: #f59d18; /* برتقالي */
+        }
+        /* أزرار التنقل الجانبية */
+        .hero-slider .carousel-control-prev,
+        .hero-slider .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            background: #f59d18;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+        .hero-slider .carousel-control-prev {
+            left: 20px;
+            right: auto;
+        }
+        .hero-slider .carousel-control-next {
+            right: 20px;
+            left: auto;
+        }
+        .hero-slider .carousel-control-prev:hover,
+        .hero-slider .carousel-control-next:hover {
+            background: #ffc66f;
+            opacity: 1;
+        }
+        .hero-slider .carousel-control-prev-icon,
+        .hero-slider .carousel-control-next-icon {
+            filter: invert(1);
+        }
+
+        /* ========== الكروت ========== */
+        .news-card {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 0;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+        }
+        .news-card.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .news-card:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .news-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 0;
+            display: block;
+        }
+        /* الشريط البرتقالي مع قص النص الطويل */
+        .news-tag {
+            background-color: #f59d18;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 5px 15px;
+            width: 100%;
+            margin: 5px 0;
+            text-align: center;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* الفقرة السفلية */
+        .news-excerpt {
+            background-color: rgba(73, 73, 73, 0.685);
+            color: white;
+            font-size: 15px;
+            line-height: 1.5;
+            padding: 5px 10px 7px;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        /* مجموعة الكروت */
+        .news-grid {
+            display: none;
+        }
+        .news-grid.active-grid {
+            display: flex;
+        }
+
+        /* رأس القسم: الأزرار */
+        .section-header-with-nav {
+            margin-bottom: 7px;
+        }
+        .nav-arrows {
+            display: flex;
+            gap: 5px;
+        }
+        .nav-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 3px;
+            background: rgb(236, 78, 50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            opacity: 0.9;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.39);
+        }
+        .nav-arrow:hover {
+            background: rgb(192, 54, 0);
+        }
+
+        /* Pagination بالأرقام */
+        .pagination-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+        .page-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 0;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: rgba(73, 73, 73, 0.685);
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(73, 73, 73, 0.685);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .page-number.active-page {
+            background: #f59d18;
+            color: #000;
+            border-color: #f59d18;
+        }
+        .page-number:hover {
+            background: rgba(73, 73, 73, 0.685);
+            color: #fff;
+            border: none;
+        }
+
+        /* تجاوب */
+        @media (max-width: 768px) {
+            .hero-slider { height: 350px; }
+            .hero-slider .carousel-item { height: 350px; }
+            .news-card img { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- الهيدر كما هو -->
+<nav id="mainNavbar" class="fixed-top p-0">
+    <div class="nav-container">
+        <div class="top-bars text-white pt-1">
+        <div class="container">
+            <div class="top-head-bar">
+                <div class="col-4 text-start fw-bold head-item">⏰ السبت - الخميس : 9 - 5</div>
+                <div class="col-4 text-center">
+                    <a class="navbar-brand m-0 p-0" href="#">
+                        <img src="/imag/LogoEngAr.png" style="height:35px;">
+                    </a>
+                </div>
+                <div class="col-4 text-end small head-item">📞 0790000000 | ✉ info@example.com</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-bars w-100 h-100">
+        <div class="container">
+            <div class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auo gap-3 menu-list">
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">من نحن</a>
+                            <ul class="dropdown-menu text-end">
+                                <li><a href="/about/board-of-trustees.html" class="dropdown-item">مجلس أمناء المدارس</a></li>
+                                <li><a class="dropdown-item" href="/about/bishop's-speech.html">كلمة سيادة المطران</a></li>
+                                <li><a class="dropdown-item" href="/about/general-manager.html">كلمة مدير عام المدارس</a></li>
+                                <li><a class="dropdown-item" href="/about/our-logo.html">شعارنا</a></li>
+                                <li><a class="dropdown-item" href="/about/our-vision.html">رؤيتنا رسالتنا قيمنا</a></li> 
+                                <li><a class="dropdown-item" href="/about/our-history.html">تاريخنا</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="/schools/schools.html" class="nav-link">المدارس</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">برامجنا</a>
+                            <ul class="dropdown-menu text-end">
+                                <li><a class="dropdown-item" href="our-programs.html">المراحل التعليمية</a></li>
+                                <li><a class="dropdown-item" href="program1.html">البرنامج الوطني</a></li>
+                                <li><a class="dropdown-item" href="program2.html">البرنامج الدولي</a></li>
+                                <li><a class="dropdown-item" href="nursery.html">تقويم المدارس</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">الحياة المدرسية</a>
+                             <ul class="dropdown-menu text-end">
+                                <li><a class="dropdown-item" href="/our-competitions.html">المسابقات</a></li>
+                                <li><a class="dropdown-item" href="/our-activites.html">الأنشطة المدرسية</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/registration.html">القبول والتسجيل</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">أخبارنا</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">التوظيف</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">تواصل معنا</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</nav>
+
+<!-- المحتوى الرئيسي -->
+<section class="schools py-4 fade-card">
+    <div class="pb-3">
+        <div class="section-header mb-4 position-relative container">
+            <h2 class="fw-bold mb-3 text-center" style="font-family:'cairo' ;">أخبارنا</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/index.html" class="breadcrumb-link d-flex align-items-center">الرئيسية ></a></li>
+                    <li>أخبارنا</li>
+                </ol>
+            </nav>
+        </div>
+        <hr>
+    </div>
+
+    <!-- ===== السلايدر العلوي (قابل للتكرار مع الـ backend) ===== -->
+    <div id="newsHeroSlider" class="carousel slide hero-slider" data-bs-ride="carousel" data-bs-interval="4000">
+        <!-- المؤشرات (dots) -->
+        <div class="carousel-indicators">
+            <!-- يتم توليدها تلقائياً عبر الـ backend أو JavaScript -->
+        </div>
+        <!-- الصور -->
+        <div class="carousel-inner">
+            <!-- هنا يتم تكرار العناصر من الـ backend -->
+            <!-- مثال: أول عنصر نشط -->
+            <div class="carousel-item active"  style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2032&auto=format&fit=crop');"></div>
+            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=2070&auto=format&fit=crop');"></div>
+            <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2032&auto=format&fit=crop');"></div>
+            <!-- يمكنك إضافة المزيد بنفس الطريقة -->
+        </div>
+        <!-- أزرار التنقل -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#newsHeroSlider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#newsHeroSlider" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- قسم الكروت -->
+    <div class="container mt-5">
+        <!-- رأس القسم: الأزرار -->
+        <div class="section-header-with-nav">
+            <div class="nav-arrows">
+                <button class="nav-arrow" id="prevPage"><i class="fas fa-chevron-right"></i></button>
+                <button class="nav-arrow" id="nextPage"><i class="fas fa-chevron-left"></i></button>
+            </div>
+        </div>
+
+        <!-- مجموعات الكروت (4 مجموعات، كل مجموعة 4 كروت) -->
+        <div class="news-grids-wrapper">
+            <!-- المجموعة 1 -->
+            <div class="row g-4 news-grid active-grid" data-group="1">
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">زيارات رسمية من وفود هامة</span>
+                        <p class="news-excerpt">زيارة وفد من جامعة عمان الأهلية للتعريف ببرامج المنح الدراسية.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">مستجدات</span>
+                        <p class="news-excerpt">افتتاح مختبر الحاسوب الجديد بحضور مدير التربية والتعليم وعدد من أولياء الأمور.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2032&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">فعاليات</span>
+                        <p class="news-excerpt">طلاب المدرسة يشاركون في مسابقة الروبوت الوطنية ويحققون المركز الأول.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">إنجازات</span>
+                        <p class="news-excerpt">حصول المدرسة على الاعتماد الدولي للبرامج التعليمية المطبقة.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- المجموعة 2 -->
+            <div class="row g-4 news-grid" data-group="2">
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">هذا نص طويل جداً جداً لاختبار علامات الحذف</span>
+                        <p class="news-excerpt">حصول المدرسة على الاعتماد الدولي للبرامج التعليمية المطبقة.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">زيارات</span>
+                        <p class="news-excerpt">زيارة وفد من جامعة عمان الأهلية للتعريف ببرامج المنح الدراسية.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=2072&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">تدريب</span>
+                        <p class="news-excerpt">ورشة عمل في الذكاء الاصطناعي لطلبة المرحلة الثانوية.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">رياضة</span>
+                        <p class="news-excerpt">فوز فريق كرة السلة بالمدرسة في بطولة المدارس الخاصة.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- المجموعة 3 -->
+            <div class="row g-4 news-grid" data-group="3">
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=2072&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">تدريب</span>
+                        <p class="news-excerpt">ورشة عمل في الذكاء الاصطناعي لطلبة المرحلة الثانوية.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e0b?q=80&w=2069&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">مجتمع</span>
+                        <p class="news-excerpt">حملة تبرعات بالملابس والمواد الغذائية للأسر المتعففة.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=1887&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">فنون</span>
+                        <p class="news-excerpt">معرض فني سنوي يضم أعمال الطلاب في الرسم والأشغال اليدوية.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1887&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">صحة</span>
+                        <p class="news-excerpt">يوم طبي مجاني لطلاب المدرسة بالتعاون مع مستشفى السلام.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- المجموعة 4 -->
+            <div class="row g-4 news-grid" data-group="4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1591123120675-6f7f1aae0e0b?q=80&w=2069&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">مجتمع</span>
+                        <p class="news-excerpt">حملة تبرعات بالملابس والمواد الغذائية للأسر المتعففة.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">مؤتمرات</span>
+                        <p class="news-excerpt">مشاركة المدرسة في المؤتمر السنوي لتطوير المناهج.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">تكريم</span>
+                        <p class="news-excerpt">تكريم الطلاب المتفوقين في الفصل الدراسي الأول.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="خبر">
+                        <span class="news-tag">جودة</span>
+                        <p class="news-excerpt">حصول المدرسة على شهادة الأيزو 9001 في إدارة الجودة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination بالأرقام -->
+        <div class="pagination-numbers">
+            <span class="page-number active-page" data-page="1">1</span>
+            <span class="page-number" data-page="2">2</span>
+            <span class="page-number" data-page="3">3</span>
+            <span class="page-number" data-page="4">4</span>
+        </div>
+    </div>
+</section>
+
+<!-- الفوتر كما هو -->
+<footer class="footer-minimal text-white pt-5 px-2">
+    <div class="container pb-4">
+        <div class="row gy-4">
+            <div class="col-lg-3 col-md-6">
+                <h5 class="footer-title">من نحن</h5>
+                <p class="footer-text">مدرسة تقنية معلومات رائدة في الأردن، نهدف إلى بناء جيل مبدع ومؤهل أكاديميًا وعمليًا.</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-title">معلومات التواصل</h6>
+                <p class="footer-text"><i class="fa fa-location-dot me-2"></i>عمّان – الأردن</p>
+                <p class="footer-text"><i class="fa fa-phone me-2"></i>06 000 0000</p>
+                <p class="footer-text"><i class="fa fa-mobile-screen me-2"></i>07 0000 0000</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-title">أوقات الدوام</h6>
+                <p class="footer-text">السبت – الخميس</p>
+                <p class="footer-text">من 8:00 صباحًا حتى 3:00 مساءً</p>
+                <p class="footer-text">الجمعة: مغلق</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h6 class="footer-title">تابعنا</h6>
+                <p class="footer-text">اشترك في نشرتنا البريدية ليصلك كل جديد عن برامجنا التعليمية.</p>
+                <form class="d-flex gap-2 mb-3">
+                    <input type="email" class="form-control form-control-sm" placeholder="بريدك الإلكتروني">
+                    <button class="btn btn-outline-warning btn-sm">اشتراك</button>
+                </form>
+                <div class="d-flex gap-3">
+                    <a href="#" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom text-center pt-3 pb-2">
+        <p>جميع الحقوق محفوظة © 2026<br>روضات ومدارس بطريركية الروم الأرثوذكس المقدسية</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="Js/Js.js"></script>
+
+<!-- سكربت pagination (نفسه) -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const groups = document.querySelectorAll('.news-grid');
+    const pageNumbers = document.querySelectorAll('.page-number');
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    let currentPage = 1;
+    const totalPages = 4;
+
+    function showGroup(page) {
+        groups.forEach(g => g.classList.remove('active-grid'));
+        document.querySelector(`.news-grid[data-group="${page}"]`).classList.add('active-grid');
+        
+        pageNumbers.forEach(num => {
+            num.classList.remove('active-page');
+            if (parseInt(num.dataset.page) === page) {
+                num.classList.add('active-page');
+            }
+        });
+        currentPage = page;
+    }
+
+    pageNumbers.forEach(num => {
+        num.addEventListener('click', function() {
+            showGroup(parseInt(this.dataset.page));
+        });
+    });
+
+    prevBtn.addEventListener('click', function() {
+        if (currentPage > 1) showGroup(currentPage - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+        if (currentPage < totalPages) showGroup(currentPage + 1);
+    });
+});
+</script>
+
+<!-- سكربت fade-on-scroll للكروت -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.news-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                // يمكنك إلغاء المراقبة بعد الظهور إذا أردت
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2, // يظهر عندما يكون 20% من العنصر مرئي
+        rootMargin: '0px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+});
+</script>
+
+<!-- سكربت توليد الـ indicators تلقائياً (إذا كنت تريد ديناميكية كاملة) -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // هذا السكربت يقوم بإنشاء الأزرار (indicators) بناءً على عدد العناصر في carousel-inner
+    // يمكنك الاستغناء عنه إذا كنت تولدهم من الـ backend
+    const carousel = document.getElementById('newsHeroSlider');
+    const items = carousel.querySelectorAll('.carousel-item');
+    const indicatorsContainer = carousel.querySelector('.carousel-indicators');
+    
+    // تفريغ المؤشرات الحالية (إذا وجدت)
+    indicatorsContainer.innerHTML = '';
+    
+    items.forEach((item, index) => {
+        const button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('data-bs-target', '#newsHeroSlider');
+        button.setAttribute('data-bs-slide-to', index);
+        if (index === 0) {
+            button.classList.add('active');
+            button.setAttribute('aria-current', 'true');
+        }
+        indicatorsContainer.appendChild(button);
+    });
+});
+</script>
+</body>
+</html>
